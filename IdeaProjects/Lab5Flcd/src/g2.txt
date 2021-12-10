@@ -1,0 +1,24 @@
+program,simple_type,array_type,arr,type,declaration,statement_list,structured_statement,indexed_identifier,statement,compound_statement,simple_statement,if_statement,for_statement,while_statement,expression,assignment_statement,term,factor,io_statement,relation,condition
+v,vect,int,char,bool,float,str,verify,other,do,while,read,print,from,to,(,),{,},;,:,.,+,*,-,=,~,>,<,<=,>=,/,%,_,@,!,and,or,integer_constant,identifier,string_constant,boolean_constant,character_constant,constant
+program
+program -> compound_statement
+simple_type -> int | str | char | bool | float
+array_type -> simple_type arr
+type -> simple_type | array_type
+declaration -> v type   identifier | vect type identifier
+statement_list -> statement | statement statement_list
+statement -> simple_statement | structured_statement
+compound_statement -> { statement_list }
+simple_statement -> ( assignment_statement | io_statement | declaration ) .
+structured_statement -> compound_statement | if_statement | while_statement | for_statement
+if_statement -> verify ( condition ) : statement  other ( condition ) : statement  other : statement
+for_statement -> from  int assignment_statement ; condition to assignment_statement : statement
+while_statement -> while ( condition ) : statement
+expression -> expression | expression ( + | - )  term
+assignment_statement ->  identifier ~ ( identifier | character_constant | string_constant | boolean_constant )
+term -> term ( * | / ) factor | factor
+factor -> ( expression ) | integer_constant | identifier | indexed_identifier
+indexed_identifier -> identifier { integer_constant }
+io_statement -> ( read ( identifier ) ) | ( print ( ( identifier | constant ) ) )
+relation -> < | < = | = = | ! = | > = | >
+condition -> ( expression relation expression )
