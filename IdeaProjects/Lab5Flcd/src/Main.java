@@ -1,14 +1,17 @@
+import javax.swing.event.ListDataEvent;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(final String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         Grammar grammar = null;
-        ParserLL1 parser = new ParserLL1("C:\\Users\\alexa\\IdeaProjects\\Lab5Flcd\\src\\g3.txt");
+        ParserLL1 parser = new ParserLL1("C:\\Users\\alexa\\IdeaProjects\\Lab5Flcd\\src\\g1.txt");
         try {
             try {
-                String file = "C:\\Users\\alexa\\IdeaProjects\\Lab5Flcd\\src\\g3.txt";
+                String file = "C:\\Users\\alexa\\IdeaProjects\\Lab5Flcd\\src\\g1.txt";
                 grammar = Grammar.ReadGrammar(file);
 
                 System.out.println("Non-terminals");
@@ -18,6 +21,7 @@ public class Main {
                 System.out.println("Productions");
                 for (var prod : grammar.getProductions()) {
                     System.out.println(prod);
+
                 }
                 System.out.print("Non-terminal: ");
                 String nonTerminal = scanner.nextLine();
@@ -26,6 +30,8 @@ public class Main {
                 System.out.println("--------------");
                 System.out.println(ParserLL1.first(grammar));
                 System.out.println(ParserLL1.follow(grammar));
+                List<String> w = Arrays.asList(scanner.nextLine().replace("\n", "").split(" "));
+                parser.printStringOfProductions(w);
             } catch (final Exception e) {
                 System.out.println(e.getMessage());
             }
