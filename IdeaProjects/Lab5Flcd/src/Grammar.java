@@ -67,7 +67,7 @@ public Grammar(Set<String> nonterminals, Set<String> terminals, String startingS
                 }
 
                 final String[] rightSide = tokens[1].split("\\|");
-                final Set<List<String>> productionRules = new HashSet<>();
+                final Set<List<String>> productionRules = new LinkedHashSet<>();
                 for (final String rule : rightSide) {
                     productionRules.add(List.of(rule.strip().split("\\s+")));
                 }
@@ -97,4 +97,14 @@ public Grammar(Set<String> nonterminals, Set<String> terminals, String startingS
                 .findAny()
                 .orElse(null);
     }
+
+
+    public boolean isTerminal(final String symbol) {
+        return terminals.contains(symbol);
+    }
+
+    public boolean isNonterminal(final String symbol) {
+        return nonterminals.contains(symbol);
+    }
+
 }
