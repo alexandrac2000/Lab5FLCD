@@ -8,10 +8,10 @@ public class Main {
     public static void main(final String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         Grammar grammar = null;
-        ParserLL1 parser = new ParserLL1("C:\\Users\\alexa\\IdeaProjects\\Lab5Flcd\\src\\g2.txt");
+        ParserLL1 parser = new ParserLL1("C:\\Users\\alexa\\IdeaProjects\\Lab5Flcd\\src\\g1.txt");
         try {
             try {
-                String file = "C:\\Users\\alexa\\IdeaProjects\\Lab5Flcd\\src\\g2.txt";
+                String file = "C:\\Users\\alexa\\IdeaProjects\\Lab5Flcd\\src\\g1.txt";
                 grammar = Grammar.ReadGrammar(file);
 
                 System.out.println("Non-terminals");
@@ -24,7 +24,7 @@ public class Main {
 
                 }
                 System.out.print("Non-terminal: ");
-                String nonTerminal = "relation";
+                String nonTerminal = "A";
                 var production = grammar.getProductionsForNonterminal(nonTerminal);
                 System.out.println(production);
                 System.out.println("--------------");

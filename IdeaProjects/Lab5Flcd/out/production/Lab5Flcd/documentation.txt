@@ -1,0 +1,86 @@
+LL1 Parser:
+
+
+For this entire project i have created a Grammar Class,a Production class ,a ParsingTable class,a Tree class with a Node
+class and a Parser class .I have also used the TableEntity Structure used at the previous lab(the one with scanner) so i will
+not describe it.
+
+
+Grammar:
+the grammar class contains the actual grammar with the sets for the terminals,nonterminals,the startingSymbol
+and the list of productions.
+
+-I have a function from reading the grammar from the file and i put each "element " needed in its place(ex:terminals)(aka in
+the object),here i also check that the grammar is context free or not
+-A function for checking if it is a terminal and one for checking if it is a non-terminal
+-A getter for the production of a single non terminal
+-A function for validating if everything is written corectly to say so in the file:if an element is definitely a terminal
+or a non terminal,if the starting symbol is one of the nonterminals,if the starting non terminal from a production is not
+one of the nonterminals
+
+
+
+Production:
+-Has a set of rules and a starting nonterminal symbol
+-Its functions are:the getter and a toString
+
+
+ParsingTable:
+-contains a hashmap which is a table
+-We have a get which gets the value from a key,a put,a containsKey to check if that key exists there and a toString
+
+
+
+Tree+Node:
+-for the parsing tree we have also used a node class which contains itsvalues,the child and the right sibling
+-for node we have:equals and hash code
+-for the tree we have the getTableOutput:which just display where needed the table,
+a level order traversal and the actual building of the tree
+
+
+Build Tree:
+-gets as parameters the list of symbols and the piProductions
+-if the symbols are empty then null is returned
+else  we check if the current symbol is a terminal and we create its right sibling calling the same function recursively
+for the next elements of the symbols list
+if its a nonterminal i remove the first piProduction,we get the productions for the current index after removing and
+we create recursively the child and the right sibling.
+
+ParserLL1:
+-Arguments:grammar
+alpha,beta,pi-stacks
+alpha-input sequence
+beta-comparison
+pi-result
+the set of first,and follows-maps
+-a filename,the parsingtable and the numberedproductions
+
+-it's functions are:displayPiProductions,printStringOfProductions,createParseTable,getProductionForIndex,parse,
+initializeStacks,pushAsChars,getPiProductions,numberingProductions and the next ones are the ones defining this
+type of parsing and will be explained
+-firstCat:
+adds all the elements of a production of a nonterminal without epslion
+
+First:
+-first of a terminal is the actual terminal which is why we put the set only with the terminal
+-for each nonterminal we take the first element from the production of that nonterminal and we add it in that firstMsp
+-from that do we go through the firstMap and if something is a nonterminal we search for its first ,we do this repeatedly until
+first will have only terminals
+
+
+Follow:
+for every nonterminal we do an empty map ,for the startingSymbol we put epsilon cause it has no follow
+-for each nonterminal we take what was before in follow and we put it in the current follow until nothing modifies
+-then for each lefthandside we take the starting symbol and we go in its production and we check if it contains a
+nonterminal it means its first should be in the follow of the previous one ,this if every production contains that nont
+otherwise error.
+-finally if the last element of the production is still nonT from before we add all its follow
+
+
+
+
+
+
+
+
+
